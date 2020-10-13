@@ -114,7 +114,12 @@ class Reputation(commands.Cog):
             await ctx.send('Bots do not recognise your pitiful offerings smh')
         else:
             await ctx.send('You cannot rep yourself, cheating bugger.')
-
+    
+    @rep.command()
+    @commands.has_any_role(*Permissions.MOD, 'Adam-Bot Developer')
+    @commands.guild_only()
+    async def remove(self, ctx, user: discord.Member, change):
+        await award(self, ctx, user: discord.Member, '-'+change)
     @rep.command(aliases=['lb'])
     @commands.guild_only()
     async def leaderboard(self, ctx, modifier=''):
