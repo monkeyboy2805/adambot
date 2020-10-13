@@ -92,7 +92,7 @@ class Reputation(commands.Cog):
     @commands.guild_only()
     async def award(self, ctx, user: discord.Member, change = 1):
         '''Gives the member a rep, mods can do `-rep award @Member <change>` where change is the number of reps to be awarded'''
-        if ctx.author != user: #check to not rep yourself
+        if ctx.author != user and not user.bot: #check to not rep yourself, and not bots
             try:
                 change = int(change)
             except ValueError:
@@ -110,6 +110,8 @@ class Reputation(commands.Cog):
             embed.add_field(name='New Rep', value=reps)
             embed.set_footer(text=(datetime.datetime.utcnow()-datetime.timedelta(hours=1)).strftime('%x'))
             await get(ctx.guild.text_channels, name='adambot-logs').send(embed=embed)
+        elif user.bot:
+            await ctx.send('Bots do not recognise your pitiful offerings smh')
         else:
             await ctx.send('You cannot rep yourself, cheating bugger.')
 
