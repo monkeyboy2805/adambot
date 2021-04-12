@@ -11,8 +11,8 @@ import os
 from datetime import datetime, timedelta
 from csv import reader
 import asyncpg
-import cogs.utils as utils
-from cogs.utils import EmojiEnum, Todo
+import cogs.utils.utils as utils
+from cogs.utils.utils import EmojiEnum, Todo
 import pytz
 from tzlocal import get_localzone
 import argparse
@@ -293,18 +293,18 @@ if __name__ == "__main__":
     parser.add_argument("-p", "--prefix", nargs="?", default="-")
     parser.add_argument("-t", "--token", nargs="?", default=None)  # can change token on the fly/keep env clean
     args = parser.parse_args()
-    cog_names = ['member',
-                 'moderation',
-                 'questionotd',
-                 'waitingroom',
-                 'support',
-                 'reputation',
-                 'trivia',
-                 'private',
-                 'demographics',
-                 'spotify',
-                 'warnings',
-                 'logging',
-                 'eval'] # Make this dynamic?
+    cog_names = ['member.member',
+                 'moderation.moderation',
+                 'misc.questionotd',
+                 'moderation.waitingroom',  # or should this be guild.waitingroom
+                 'moderation.support',
+                 'misc.reputation',  # couldn't decide how to categorise
+                 'misc.trivia',
+                 'misc.private',
+                 'guild.demographics',
+                 'member.info.spotify',
+                 'moderation.warnings',
+                 'moderation.logging',
+                 'development.eval'] # Make this dynamic?
     bot = AdamBot(local_host, cog_names, start_time, token=args.token, command_prefix=args.prefix, intents=intents)
     # bot.remove_command("help")

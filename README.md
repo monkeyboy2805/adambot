@@ -1,5 +1,5 @@
 # GCSEDiscordBot (Adam-Bot)
-
+# THIS IS A STRUCTURE-CONCEPT BRANCH AND WILL NOT RUN
 ![Adam-Bot logo](https://cdn.discordapp.com/avatars/525083089924259898/c16a8482a4151d0bc291bf5a2e61acf0.webp?size=256)
 
 Python code that runs "Adam-Bot", mainly for use in the GCSE 9-1 Discord server. If you have an issue, feature request, or would like to report a bug, please feel free to [raise an issue](https://github.com/adampy/gcsediscordbot/issues/new/choose).
@@ -41,6 +41,9 @@ Used for miscellaneous commands ranging from -userinfo, to -bruhs. There is no r
 ## Moderation
 Contains moderation commands, such as kicks, bans, and mutes. Slowmodes, and the jail command reside here too. The advance command, that advances everyones year (e.g. Y9 -> Y10) is here and has admin perms.
 
+## Private
+Used for functionaltiy and commands that feature in private servers.
+
 ## QuestionOTD
 The module that contains all of the commands relating to QOTDs (commonly known as question of the day). People with a "QOTD" role have permissions to view, delete, and pick OQTDs. People without these roles can only submit QOTDs (2 per 24h).
 
@@ -70,29 +73,8 @@ The welcome message, and the welcome channel, are both stored in the `variables`
 ## Warnings
 This cog is for moderation, and was originally within the Moderation cog, but I had split it out making the code easier to read. Warnings are given by staff and then can be viewed using the `-warns` command. When a member does this, they can only see their own warnings, but when a staff member does this by default it views everyones warnings. For a staff member to view their own warnings, the must do `-warns @themself`. Warnings can be removed by a staff member using the `-warnremove` command.
 
-## Logging
-The logging cog is used for, as the name suggests, logging certain events. The events that are currently logged are:
-* `on_message_delete`
-* `on_raw_bulk_message_delete`
-* `on_message_edit`
-* `on_member_update`
-* `on_user_update`
-* `on_member_remove`
-* `on_member_join`
-
-Both `on_member_update` and `on_user_update` are called for [multiple reasons](https://discordpy.readthedocs.io/en/latest/api.html#discord.on_member_update) so the code filters out the correct reason by spotting differences in the member objects - the correct reason is then logged.
-
-The log channels work by storing the log channel's ID in the `variables` table. It stores it in the format
-
-variable|value
---------|-----
-mod-log-<GUILD_ID> | <CHANNEL_ID>
-
-where <GUILD_ID> is the guild ID, <CHANNEL_ID> is the log channel ID, and `variable` and `value` are both strings.
-
-
 # :open_file_folder: Database schema
-The following describes the database schema. (Last updated changed 28/03/2021)
+The following describes the database schema, as of 28/03/2021.
 
 ##  qotd
 Field name | Type | Constraints
@@ -213,3 +195,14 @@ member_id | bigint
 This table is deprecated, and not currently used for anything. It was used for the `-toggle1738` command which has not been used for over a year.
 
 <br>
+
+## classroom
+Field name | Type | Constraints
+-----------|------|--------------
+section | int
+gid | varchar(255)
+name | varchare(255)
+
+<br>
+
+This table is deprecated, and not currently used for anything in the GCSE 9-1 server.
